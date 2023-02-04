@@ -15,7 +15,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   font-family: "Roboto", sans-serif;
 }
 body {
@@ -47,6 +47,7 @@ main header input {
   border-radius: 0.5rem;
 }
 
+/* estilização da div */
 main header div {
   display: flex;
   align-items: center;
