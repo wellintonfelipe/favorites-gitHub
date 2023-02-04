@@ -1,59 +1,81 @@
 :root {
-  --bg-color: #0b0604e4;
-  --text-color-gradient: linear-gradient(
-    to right,
-    rgb(149 144 252),
-    rgb(67 231 173),
-    rgb(226 212 92)
-  );
+  --bg-color: #000;
+
+  --color--herder: #092d38;
+  --color-font: #e1e1e6;
+  --color-primary: #065e7c;
+  --color-primary-dark: #06181c;
+  --color-button-remove: #f75a68;
 
   font-size: 62.5%;
 }
 
 * {
+  font-size: 1.6rem;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border: 1px solid red;
+  font-family: "Roboto", sans-serif;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--color-font);
+}
+h1 {
+  font-size: 2.4rem;
 }
 
-body {
+main {
+  max-height: 100vh;
+  max-width: 100vw;
+}
+main header {
+  margin: 11.5rem 16rem 8.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main header img {
+  width: 19.2rem;
+}
+
+main header input {
+  padding: 1.6rem;
+  width: 46.2rem;
+  background-color: var(--color-primary-dark);
+  border-radius: 0.5rem;
+}
+
+main header div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 1s;
+}
+main header button {
+  background-color: var(--color-primary);
+  color: var(--color-font);
+  font-weight: 700;
+  width: 20rem;
+  height: 5rem;
+  padding: 1.6rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-color);
-  min-height: 100vh;
-  font-family: "Bebas Neue", cursive;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+main header div button svg {
+  width: 2.4rem;
+  background-color: transparent;
 }
 
-#app {
-}
-
-img {
-  margin: auto;
-  display: block;
-  text-align: center;
-  height: 10rem;
-  align-content: center;
-}
-
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2rem #eee600);
-}
-
-h1 {
-  font-size: 9rem;
-  background-image: var(--text-color-gradient);
-  background-clip: text;
-  color: transparent;
-
-  -webkit-background-clip: text;
-}
-
-div::after {
-  content: "";
-  height: 4px;
-  width: 100%;
-  display: block;
-  background-image: var(--text-color-gradient);
-  border-radius: 0 0 4rem 4rem;
+main header div button:hover,
+main header div button:hover > svg path {
+  background-color: var(--color-font);
+  fill: var(--color-primary);
+  color: var(--color-primary);
+  transition: all 1ms;
 }

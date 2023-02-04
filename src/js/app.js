@@ -1,7 +1,12 @@
-import LogoJs from "../public/img/javascript.svg";
+export class Favorites {
+  constructor(root) {
+    this.root = document.querySelector(root);
+  }
+}
+export class FavoritesView extends Favorites {
+  constructor(root) {
+    super(root);
 
-export function App() {
-  return `
-  <img class="logo vanilla" src="${LogoJs}"/> 
-    <h1> Hello World</h1>`;
+    console.log(root);
+  }
 }

@@ -1,6 +1,6 @@
 import "./src/public/css/style.css";
-import { App } from "./src/js/app.js";
+import { Favorites } from "./src/js/app.js";
 
-const app = App();
+const app = new Favorites("#app");
 
 document.querySelector("#app").innerHTML = app;
