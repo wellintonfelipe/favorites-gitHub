@@ -1,0 +1,21 @@
+:root {
+  --bg-color: #000;
+
+  --color-body-table: #06161b;
+  --color-head: #092d38;
+  --color-font: #e1e1e6;
+  --color-primary: #065e7c;
+  --color-primary-dark: #06181c;
+  --color-button-remove: #f75a68;
+
+  font-size: 62.5%;
+}
+
+* {
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+  font-family: "Roboto", sans-serif;
+}
