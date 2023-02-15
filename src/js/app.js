@@ -1,3 +1,18 @@
+export class GitHubUser {
+  static async search(username) {
+    const endpoint = `https://api.github.com/users/${username}`;
+
+    return await fetch(endpoint)
+      .then((data) => data.json())
+      .then(({ login, name, public_repos, followers }) => ({
+        login,
+        name,
+        public_repos,
+        followers,
+      }));
+  }
+}
+
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector(root);
@@ -5,23 +20,12 @@ export class Favorites {
     this.tbody = this.root.querySelector("section table tbody");
 
     this.load();
+    GitHubUser.search("wellintonfelipe").then((data) => console.log(data));
   }
 
   load() {
-    this.entries = [
-      {
-        login: "wellintonfelipe",
-        name: "Wellinton Felipe",
-        public_repos: "76",
-        followers: "1200000",
-      },
-      {
-        login: "maykbrito",
-        name: "Mayk Brito",
-        public_repos: "76",
-        followers: "1200000",
-      },
-    ];
+    this.entries = JSON.parse(localStorage.getItem("@github-favorites:")) || [];
+    console.log(this.entries);
   }
 
   delete(user) {
@@ -29,7 +33,8 @@ export class Favorites {
     const filteredEntries = this.entries.filter(
       (entry) => entry.login !== user.login
     );
-    console.log(filteredEntries);
+    this.entries = filteredEntries;
+    this.update();
   }
 }
 export class FavoritesView extends Favorites {
@@ -50,7 +55,8 @@ export class FavoritesView extends Favorites {
       ).src = `https://github.com/${user.login}.png`;
 
       row.querySelector(".user img").alt = `Avatar gitHub ${user.name}`;
-      row.querySelector(".user p").textContent = user.name;
+      row.querySelector(".user h2").textContent = user.name;
+      row.querySelector(".user p").textContent = user.login;
       row.querySelector(".repositories").textContent = user.public_repos;
       row.querySelector(".followers").textContent = user.followers;
       row.querySelector(".remove").onclick = () => {
@@ -74,7 +80,7 @@ export class FavoritesView extends Favorites {
       />
       <a href="https://github.com/wellintonfelipe" target="_blank">
         <h2>Wellinton Felipe</h2>
-        <p>/wellintonfelipe</p>
+        <p>/</p>
       </a>
     </td>
     <td class="repositories">5</td>
