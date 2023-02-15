@@ -1,17 +1,4 @@
-export class GitHubUser {
-  static async search(username) {
-    const endpoint = `https://api.github.com/users/${username}`;
-
-    return await fetch(endpoint)
-      .then((data) => data.json())
-      .then(({ login, name, public_repos, followers }) => ({
-        login,
-        name,
-        public_repos,
-        followers,
-      }));
-  }
-}
+import { GitHubUser } from "./GitHubUser.js";
 
 export class Favorites {
   constructor(root) {
@@ -20,12 +7,36 @@ export class Favorites {
     this.tbody = this.root.querySelector("section table tbody");
 
     this.load();
-    GitHubUser.search("wellintonfelipe").then((data) => console.log(data));
+    GitHubUser.search("wellintonfelipe").then((data) => data);
   }
 
   load() {
     this.entries = JSON.parse(localStorage.getItem("@github-favorites:")) || [];
-    console.log(this.entries);
+  }
+
+  save() {
+    localStorage.setItem("@github-favorites:", JSON.stringify(this.entries));
+  }
+  async add(username) {
+    try {
+      const userExists = this.entries.find((entry) => entry.login === username);
+
+      if (userExists) {
+        throw new Error(`${username}, já esta cadastrado! `);
+      }
+
+      const user = await GitHubUser.search(username);
+
+      if (user.login === undefined) {
+        throw new Error("Usuario não encontrado!");
+      }
+
+      this.entries = [user, ...this.entries];
+      this.update();
+      this.save();
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   delete(user) {
@@ -35,6 +46,7 @@ export class Favorites {
     );
     this.entries = filteredEntries;
     this.update();
+    this.save();
   }
 }
 export class FavoritesView extends Favorites {
@@ -42,6 +54,17 @@ export class FavoritesView extends Favorites {
     super(root);
 
     this.update();
+    this.onAdd();
+  }
+
+  onAdd() {
+    const addButton = this.root.querySelector("header div button");
+
+    addButton.onclick = () => {
+      const { value } = this.root.querySelector("header div input");
+
+      this.add(value);
+    };
   }
 
   update() {
