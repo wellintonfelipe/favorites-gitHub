@@ -26,6 +26,7 @@ main header input {
   border: 1px solid var(--color-primary);
   padding: 1.6rem;
   width: 46.2rem;
+  color: var(--color-font);
 
   height: 4.8rem;
   background-color: var(--color-primary-dark);
@@ -122,6 +123,12 @@ table tbody tr td button {
   font-weight: 700;
   font-size: 2rem;
   color: var(--color-button-remove);
+  cursor: pointer;
+  transition: 1s all;
+}
+
+table tbody tr td button:hover {
+  color: var(--color-font);
 }
 table tr:nth-last-child(odd) {
   border-radius: 8px;
@@ -130,8 +137,6 @@ table tr:nth-last-child(odd) {
 }
 
 table th:last-child {
-  border-top: 1px solid red;
-
   border-top-right-radius: 8px;
 }
 
